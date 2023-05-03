@@ -3312,7 +3312,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1001 &157002971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4179,6 +4179,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 5c5e4f13a5a8aa140919a31acc3e480d, type: 2}
   slider: {fileID: 653065125}
   sliderValue: 0
+  dropdownResolutions: {fileID: 980977347}
 --- !u!1 &418233287
 GameObject:
   m_ObjectHideFlags: 0
@@ -5740,7 +5741,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 417241264}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
+        m_MethodName: changeResolution
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &980977348
 MonoBehaviour:
@@ -8498,7 +8511,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

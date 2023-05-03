@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+using TMPro;
+
 public class OptionsMenu : MonoBehaviour
 {
 
@@ -13,10 +15,22 @@ public class OptionsMenu : MonoBehaviour
     public float sliderValue;
 
 
+    public TMP_Dropdown dropdownResolutions;
+    Resolution[] resolutions;
+
+
+
     void Start() {
         slider.value = PlayerPrefs.GetFloat("menuMusic", 0.5f);
         AudioListener.volume = slider.value;
         checkMute();
+
+        checkResolution();
+    }
+
+
+    void update() {
+
     }
 
     public void ChangeSlider(float value) {
@@ -34,27 +48,39 @@ public class OptionsMenu : MonoBehaviour
         }
     }
 
-    // public Dropdown resolutionDropdown;
 
-    // Resolution[] resolutions;
+    public void checkResolution() {
+        resolutions = Screen.resolutions;
+        dropdownResolutions.ClearOptions();
+        List<string> options = new List<string>();
+        int currentResolution = 0;
 
-    // void Start() {
-    //     resolutions = Screen.resolutions;
+        for (int i = 0; i < resolutions.Length; i++) {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
 
-    //     resolutionDropdown.ClearOptions();
+            if (Screen.fullScreen && resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height) {
+                    currentResolution = i;
+                }
 
-    //     List<string> options = new List<string>();
+        }
 
-    //     for (int i = 0; i < resolutions.Length; i++) {
-    //         string option = resolutions[i].width + " x " + resolutions[i].height;
-    //         options.Add(option);
-    //     }
+        dropdownResolutions.AddOptions(options);
+        dropdownResolutions.value = currentResolution;
+        dropdownResolutions.RefreshShownValue();
+    }
 
-    //     resolutionDropdown.AddOptions(options);
-    // }
+
+
+    public void changeResolution(int resolutionIndex) {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
 
 
     public void SetFullscreen(bool isFullScreen) {
+        dropdownResolutions.interactable = !isFullScreen;
         Screen.fullScreen = isFullScreen;
     }
 
