@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RockMove : MonoBehaviour
+{
+
+    public bool rotate;
+    public bool move;
+
+    public float speed = 0.02f;
+    private float startPositionX;
+    // Start is called before the first frame update
+    void Start()
+    {
+        float startPositionX = transform.position[0];
+                Debug.Log(startPositionX);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (rotate) {
+        transform.Rotate(speed, speed*5, 0);
+        return;
+        }
+
+        if (move) {
+            
+        }
+    }
+}
