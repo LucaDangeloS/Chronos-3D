@@ -8,6 +8,32 @@ public class OptionsMenu : MonoBehaviour
 {
 
     public AudioMixer audioMixer;
+    public Slider slider;
+
+    public float sliderValue;
+
+
+    void Start() {
+        slider.value = PlayerPrefs.GetFloat("menuMusic", 0.5f);
+        AudioListener.volume = slider.value;
+        checkMute();
+    }
+
+    public void ChangeSlider(float value) {
+        sliderValue = value;
+        PlayerPrefs.SetFloat("menuMusic", sliderValue);
+        AudioListener.volume = slider.value;
+        checkMute();
+    }
+
+    public void checkMute() {
+        if (sliderValue == 0) {
+            //image true
+        } else {
+            // image false
+        }
+    }
+
     // public Dropdown resolutionDropdown;
 
     // Resolution[] resolutions;
@@ -26,10 +52,6 @@ public class OptionsMenu : MonoBehaviour
 
     //     resolutionDropdown.AddOptions(options);
     // }
-
-    public void SetVolumen(float volume) {
-       audioMixer.SetFloat("volume", volume);
-    }
 
 
     public void SetFullscreen(bool isFullScreen) {
