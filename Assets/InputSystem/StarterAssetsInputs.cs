@@ -20,6 +20,8 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		public bool gameIsPaused = false;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
 		{
@@ -45,6 +47,14 @@ namespace StarterAssets
 		}
 #endif
 
+		public void setGamePaused(bool isPaused)
+		{
+			cursorInputForLook = !isPaused;
+			cursorLocked = !isPaused;
+            LookInput(Vector3.zero);
+            gameIsPaused = isPaused;
+            SetCursorState(cursorLocked);
+        }
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
@@ -53,7 +63,8 @@ namespace StarterAssets
 
 		public void LookInput(Vector2 newLookDirection)
 		{
-			look = newLookDirection;
+			if (gameIsPaused) return;
+            look = newLookDirection;
 		}
 
 		public void JumpInput(bool newJumpState)
