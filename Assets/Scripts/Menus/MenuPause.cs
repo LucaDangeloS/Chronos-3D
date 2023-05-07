@@ -29,14 +29,12 @@ public class MenuPause : MonoBehaviour
     public void Pause() {
         inputController.setGamePaused(true);
         timeManipulator.SetTime(0f);
-        playerController.setSyncDeltaTime(true);
         menuPause.SetActive(true);
     }
 
     public void Resume() {
         inputController.setGamePaused(false);
         timeManipulator.SetTime(1f);
-        playerController.setSyncDeltaTime(false);
         menuPause.SetActive(false);
         menuOptions.SetActive(false);
     }
