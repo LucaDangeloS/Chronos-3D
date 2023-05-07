@@ -24,22 +24,6 @@ namespace StarterAssets
         [Header("Player TimeScale control")]
         private float _playerDeltaTime;
         private bool _isSyncedDeltaTime;
-        private bool isSyncedDeltaTime
-        {
-            get { return _isSyncedDeltaTime; }
-            set
-            {
-                _isSyncedDeltaTime = value;
-                if (_isSyncedDeltaTime)
-                {
-                    _playerDeltaTime = Time.deltaTime;
-                }
-                else
-                {
-                    _playerDeltaTime = Time.unscaledDeltaTime;
-                }
-            }
-        }
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -181,14 +165,8 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-            if (_isSyncedDeltaTime)
-            {
-                _playerDeltaTime = Time.deltaTime;
-            }
-            else
-            {
-                _playerDeltaTime = Time.unscaledDeltaTime;
-            }
+            _playerDeltaTime = _isSyncedDeltaTime ? Time.deltaTime : Time.unscaledDeltaTime;
+            Debug.Log(Time.timeScale);
             JumpAndGravity();
             GroundedCheck();
             Move();
@@ -196,7 +174,7 @@ namespace StarterAssets
 
         public void setSyncDeltaTime(bool pause)
         {
-            isSyncedDeltaTime = pause;
+            _isSyncedDeltaTime = pause;
         }
 
         private void LateUpdate()

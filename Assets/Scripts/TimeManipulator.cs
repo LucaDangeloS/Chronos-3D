@@ -28,11 +28,11 @@ public class TimeManipulator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            SetTime(0.2f);
-        } else if (Input.GetKeyDown(KeyCode.LeftAlt)) {
-            SetTime(1f);
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftControl)) {
+        //    SetTime(0.2f);
+        //} else if (Input.GetKeyDown(KeyCode.LeftAlt)) {
+        //    SetTime(1f);
+        //}
         Time.timeScale = timeScale;
     }
 

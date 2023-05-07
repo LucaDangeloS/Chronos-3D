@@ -9,9 +9,11 @@ using UnityEngine.SceneManagement;
 public class MenuPause : MonoBehaviour
 {
     [SerializeField] private GameObject menuPause;
+    [SerializeField] private GameObject menuOptions;
     public CinemachineVirtualCamera cameraController;
     public StarterAssetsInputs inputController;
     public ThirdPersonController playerController;
+    public TimeManipulator timeManipulator;
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -26,14 +28,14 @@ public class MenuPause : MonoBehaviour
     // Start is called before the first frame update
     public void Pause() {
         inputController.setGamePaused(true);
-        Time.timeScale = 0f;
+        timeManipulator.SetTime(0f);
         playerController.setSyncDeltaTime(true);
         menuPause.SetActive(true);
     }
 
     public void Resume() {
         inputController.setGamePaused(false);
-        Time.timeScale = 1f;
+        timeManipulator.SetTime(1f);
         playerController.setSyncDeltaTime(false);
         menuPause.SetActive(false);
         menuOptions.SetActive(false);
@@ -41,7 +43,7 @@ public class MenuPause : MonoBehaviour
 
 
     public void Retry() {
-        Time.timeScale = 1f;
+        timeManipulator.SetTime(0f);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         // Application.LoadLevel(Application.loadedLevel);

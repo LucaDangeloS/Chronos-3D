@@ -34,15 +34,14 @@ public class SwitchLevel : MonoBehaviour
 
     public void LoadLevel(int index)
     {
+        // If made async the player inputs have to be disabled
         SceneManager.LoadScene(index);
     }
 
     IEnumerator DelayLoadLevel(int index)
     {
-        Debug.Log("Delaying load level");
         yield return new WaitForSeconds(transitionDelayTime);
         if (!isInsidePortal) yield break;
-        Debug.Log("Portal active");
         LoadLevel(index);
     }
 }
