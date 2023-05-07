@@ -22,7 +22,7 @@ public class RockMove : MonoBehaviour
     void Update()
     {
         if (rotate) {
-        transform.Rotate(speed, speed*5, 0);
+        transform.Rotate(0, speed, 0);
         return;
         }
 

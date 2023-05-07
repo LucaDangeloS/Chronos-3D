@@ -4,16 +4,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuPause : MonoBehaviour
 {
     [SerializeField] private GameObject menuPause;
+    [SerializeField] private GameObject menuOptions;
     public CinemachineVirtualCamera cameraController;
     public StarterAssetsInputs inputController;
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (menuPause.activeSelf) {
+            if (menuPause.activeSelf || menuOptions.activeSelf) {
                 Resume();
             } else {
                 Pause();
@@ -34,6 +36,16 @@ public class MenuPause : MonoBehaviour
         inputController.setGamePaused(false);
         Time.timeScale = 1f;
         menuPause.SetActive(false);
+        menuOptions.SetActive(false);
+    }
+
+
+    public void Retry() {
+        Time.timeScale = 1f;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // Application.LoadLevel(Application.loadedLevel);
+        //  SceneManager.LoadScene("Level2");
     }
 
 }
