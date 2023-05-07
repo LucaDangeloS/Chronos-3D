@@ -8,8 +8,8 @@ public class RockMove : MonoBehaviour
     public bool rotate;
     public bool move;
 
-    public float speed = 0.02f;
-    public float moveSpeed = 0.05f;
+    public float speed = 15f;
+    public float moveSpeed = 4f;
     private float startPositionX;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class RockMove : MonoBehaviour
     void Update()
     {
         if (rotate) {
-        transform.Rotate(0, speed, 0);
+        transform.Rotate(0, speed * Time.deltaTime, 0);
         return;
         }
 
@@ -38,7 +38,7 @@ public class RockMove : MonoBehaviour
             }
 
 
-            transform.Translate(moveSpeed, 0, 0);
+            transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
             // Debug.Log("move");
         }
     }

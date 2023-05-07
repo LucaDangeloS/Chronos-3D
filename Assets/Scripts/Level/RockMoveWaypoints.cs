@@ -8,17 +8,15 @@ public class RockMoveWaypoints : MonoBehaviour
     [SerializeField] GameObject[] waypoints;
     int currentWaypointIndex = 0;
 
-    [SerializeField] float speed = 1f;
-
+    [SerializeField] float speed = 4f;
+    public bool rotateX = false;
+    public bool rotateY = false;
+    public bool rotateZ = false;
 
     void Update()
     {
-        Debug.Log(currentWaypointIndex);
         if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < .1f) {
-            currentWaypointIndex++;
-            if (currentWaypointIndex >= waypoints.Length) {
-                currentWaypointIndex = 0;
-            }
+            currentWaypointIndex = (++currentWaypointIndex) % waypoints.Length;
         }
 
         transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, speed * Time.deltaTime);
