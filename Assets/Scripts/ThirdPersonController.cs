@@ -166,7 +166,7 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
             _playerDeltaTime = _isSyncedDeltaTime ? Time.deltaTime : Time.unscaledDeltaTime;
-            Debug.Log(Time.timeScale);
+            //Debug.Log(Time.timeScale);
             JumpAndGravity();
             GroundedCheck();
             Move();
@@ -250,9 +250,17 @@ namespace StarterAssets
             {
                 // creates curved result rather than a linear one giving a more organic speed change
                 // note T in Lerp is clamped, so we don't need to clamp our speed
-                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                    _playerDeltaTime * SpeedChangeRate);
 
+                // if we are freefalling we should not take into account the inputMagnitude.
+                if (_animator.GetBool(_animIDFreeFall)) {
+                    //Debug.Log("Freefalling");
+                    _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed,
+                        _playerDeltaTime * SpeedChangeRate);
+                } else {
+                    //Debug.Log("NOT freefalling");
+                    _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
+                        _playerDeltaTime * SpeedChangeRate);
+                }
                 // round speed to 3 decimal places
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
             }
@@ -336,6 +344,7 @@ namespace StarterAssets
             }
             else
             {
+                //Debug.Log("NOT GROUNDED");
                 // reset the jump timeout timer
                 _jumpTimeoutDelta = JumpTimeout;
 
@@ -346,6 +355,7 @@ namespace StarterAssets
                 }
                 else
                 {
+                    Debug.Log("SET TO TRUE FREEFALL");
                     // update animator if using character
                     if (_hasAnimator)
                     {
