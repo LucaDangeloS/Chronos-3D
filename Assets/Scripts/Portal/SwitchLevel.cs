@@ -12,11 +12,6 @@ public class SwitchLevel : MonoBehaviour
     public ParticleSystem playerParticles;
     private bool isInsidePortal = false;
 
-    public void Start()
-    {
-        playerParticles.Stop();
-    }
-
     public void OnTriggerEnter(Collider other)
     {
 
