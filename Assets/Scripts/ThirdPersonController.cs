@@ -21,6 +21,26 @@ namespace StarterAssets
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
 
+        [Header("Player TimeScale control")]
+        private float _playerDeltaTime;
+        private bool _isSyncedDeltaTime;
+        private bool isSyncedDeltaTime
+        {
+            get { return _isSyncedDeltaTime; }
+            set
+            {
+                _isSyncedDeltaTime = value;
+                if (_isSyncedDeltaTime)
+                {
+                    _playerDeltaTime = Time.deltaTime;
+                }
+                else
+                {
+                    _playerDeltaTime = Time.unscaledDeltaTime;
+                }
+            }
+        }
+
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -161,10 +181,22 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-
+            if (_isSyncedDeltaTime)
+            {
+                _playerDeltaTime = Time.deltaTime;
+            }
+            else
+            {
+                _playerDeltaTime = Time.unscaledDeltaTime;
+            }
             JumpAndGravity();
             GroundedCheck();
             Move();
+        }
+
+        public void setSyncDeltaTime(bool pause)
+        {
+            isSyncedDeltaTime = pause;
         }
 
         private void LateUpdate()
@@ -202,7 +234,7 @@ namespace StarterAssets
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
                 //Don't multiply mouse input by Time.deltaTime;
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : _playerDeltaTime;
 
                 _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
                 _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
@@ -241,7 +273,7 @@ namespace StarterAssets
                 // creates curved result rather than a linear one giving a more organic speed change
                 // note T in Lerp is clamped, so we don't need to clamp our speed
                 _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                    Time.deltaTime * SpeedChangeRate);
+                    _playerDeltaTime * SpeedChangeRate);
 
                 // round speed to 3 decimal places
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
@@ -251,7 +283,7 @@ namespace StarterAssets
                 _speed = targetSpeed;
             }
 
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, _playerDeltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
@@ -274,8 +306,8 @@ namespace StarterAssets
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            _controller.Move(targetDirection.normalized * (_speed * _playerDeltaTime) +
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * _playerDeltaTime);
 
             // update animator if using character
             if (_hasAnimator)
@@ -321,7 +353,7 @@ namespace StarterAssets
                 // jump timeout
                 if (_jumpTimeoutDelta >= 0.0f)
                 {
-                    _jumpTimeoutDelta -= Time.deltaTime;
+                    _jumpTimeoutDelta -= _playerDeltaTime;
                 }
             }
             else
@@ -332,7 +364,7 @@ namespace StarterAssets
                 // fall timeout
                 if (_fallTimeoutDelta >= 0.0f)
                 {
-                    _fallTimeoutDelta -= Time.deltaTime;
+                    _fallTimeoutDelta -= _playerDeltaTime;
                 }
                 else
                 {
@@ -350,7 +382,7 @@ namespace StarterAssets
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
             {
-                _verticalVelocity += Gravity * Time.deltaTime;
+                _verticalVelocity += Gravity * _playerDeltaTime;
             }
         }
 

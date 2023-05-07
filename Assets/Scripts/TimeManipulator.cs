@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine.InputSystem;
 public class TimeManipulator : MonoBehaviour
 {
     public float timeScale = 1f;
-    public GameObject player;
 
     private void OnEnable()
     {
@@ -22,20 +22,21 @@ public class TimeManipulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            Debug.Log("Slowi");
-            SlowTime(0.5f);
+            SetTime(0.2f);
+        } else if (Input.GetKeyDown(KeyCode.LeftAlt)) {
+            SetTime(1f);
         }
         Time.timeScale = timeScale;
     }
 
-    public void SlowTime(float slowFactor)
+    public void SetTime(float slowFactor)
     {
         timeScale = slowFactor;
     }

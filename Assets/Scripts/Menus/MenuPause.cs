@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 public class MenuPause : MonoBehaviour
 {
     [SerializeField] private GameObject menuPause;
-    [SerializeField] private GameObject menuOptions;
     public CinemachineVirtualCamera cameraController;
     public StarterAssetsInputs inputController;
+    public ThirdPersonController playerController;
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -25,16 +25,16 @@ public class MenuPause : MonoBehaviour
 
     // Start is called before the first frame update
     public void Pause() {
-        //cameraController.Follow = null;
         inputController.setGamePaused(true);
         Time.timeScale = 0f;
+        playerController.setSyncDeltaTime(true);
         menuPause.SetActive(true);
     }
 
     public void Resume() {
-        //cameraController.Follow = playerCameraRoot.transform;
         inputController.setGamePaused(false);
         Time.timeScale = 1f;
+        playerController.setSyncDeltaTime(false);
         menuPause.SetActive(false);
         menuOptions.SetActive(false);
     }
