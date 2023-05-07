@@ -21,10 +21,6 @@ namespace StarterAssets
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
 
-        [Header("Player TimeScale control")]
-        private float _playerDeltaTime;
-        private bool _isSyncedDeltaTime;
-
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -165,16 +161,10 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-            _playerDeltaTime = _isSyncedDeltaTime ? Time.deltaTime : Time.unscaledDeltaTime;
             //Debug.Log(Time.timeScale);
             JumpAndGravity();
             GroundedCheck();
             Move();
-        }
-
-        public void setSyncDeltaTime(bool pause)
-        {
-            _isSyncedDeltaTime = pause;
         }
 
         private void LateUpdate()
@@ -212,7 +202,7 @@ namespace StarterAssets
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
                 //Don't multiply mouse input by Time.deltaTime;
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : _playerDeltaTime;
+                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
                 _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
                 _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
@@ -255,11 +245,11 @@ namespace StarterAssets
                 if (_animator.GetBool(_animIDFreeFall)) {
                     //Debug.Log("Freefalling");
                     _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed,
-                        _playerDeltaTime * SpeedChangeRate);
+                        Time.deltaTime * SpeedChangeRate);
                 } else {
                     //Debug.Log("NOT freefalling");
                     _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                        _playerDeltaTime * SpeedChangeRate);
+                        Time.deltaTime * SpeedChangeRate);
                 }
                 // round speed to 3 decimal places
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
@@ -269,7 +259,7 @@ namespace StarterAssets
                 _speed = targetSpeed;
             }
 
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, _playerDeltaTime * SpeedChangeRate);
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
@@ -292,8 +282,8 @@ namespace StarterAssets
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * _playerDeltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * _playerDeltaTime);
+            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)
@@ -339,7 +329,7 @@ namespace StarterAssets
                 // jump timeout
                 if (_jumpTimeoutDelta >= 0.0f)
                 {
-                    _jumpTimeoutDelta -= _playerDeltaTime;
+                    _jumpTimeoutDelta -= Time.deltaTime;
                 }
             }
             else
@@ -351,11 +341,10 @@ namespace StarterAssets
                 // fall timeout
                 if (_fallTimeoutDelta >= 0.0f)
                 {
-                    _fallTimeoutDelta -= _playerDeltaTime;
+                    _fallTimeoutDelta -= Time.deltaTime;
                 }
                 else
                 {
-                    Debug.Log("SET TO TRUE FREEFALL");
                     // update animator if using character
                     if (_hasAnimator)
                     {
@@ -370,7 +359,7 @@ namespace StarterAssets
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
             {
-                _verticalVelocity += Gravity * _playerDeltaTime;
+                _verticalVelocity += Gravity * Time.deltaTime;
             }
         }
 
