@@ -1415,7 +1415,7 @@ PrefabInstance:
     - target: {fileID: 880970725214738984, guid: c60edd51c065ceb46b345849a03bc106,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.63
+      value: 17.423
       objectReference: {fileID: 0}
     - target: {fileID: 880970725214738984, guid: c60edd51c065ceb46b345849a03bc106,
         type: 3}
@@ -4391,6 +4391,11 @@ PrefabInstance:
       propertyPath: m_PolyMesh.m_Mesh
       value: 
       objectReference: {fileID: 1015911690}
+    - target: {fileID: 5097138750385698330, guid: 2ff4e76985f208843911a4caa31bcb36,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5097138750896058086, guid: 2ff4e76985f208843911a4caa31bcb36,
         type: 3}
       propertyPath: m_Mesh
