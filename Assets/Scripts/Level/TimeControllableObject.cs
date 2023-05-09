@@ -16,7 +16,7 @@ public class TimeControllableObject : MonoBehaviour
     private Vector3 gravity = Physics.gravity;
     private Vector3 prevVelocity = Vector3.zero;
     private Vector3 velocityDelta = Vector3.zero;
-    private bool isReturningToSpeed = false;
+
     // Still buggy with object forces
     // Still need to stop the object rotation
     void Start()
@@ -71,12 +71,12 @@ public class TimeControllableObject : MonoBehaviour
             rb.useGravity = false;
             if (firstSet)
             {
-                rb.velocity = rb.velocity * newTime;
-                prevVelocity = prevVelocity * newTime;
+                rb.velocity *= newTime;
+                prevVelocity *= newTime;
             } else
             {
-                rb.velocity = rb.velocity * (1 + (timeScale - newTime));
-                prevVelocity = prevVelocity * (1 + (timeScale - newTime));
+                rb.velocity *= (1 + (timeScale - newTime));
+                prevVelocity *= (1 + (timeScale - newTime));
             }
             timeScale = newTime;
             if (outline != null)
