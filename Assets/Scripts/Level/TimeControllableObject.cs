@@ -29,7 +29,7 @@ public class TimeControllableObject : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            SetTimeScale(0.2f);
+            SetTimeScale(0.05f);
         }
     }
     void FixedUpdate()
@@ -82,7 +82,7 @@ public class TimeControllableObject : MonoBehaviour
             if (outline != null)
             {
                 float lerpAmount = Mathf.Clamp01((1f - timeScale) / 0.5f);
-                Color newColor = Color.Lerp(new Color(0, 0, 0, 0), Color.red, lerpAmount);
+                Color newColor = Color.Lerp(new Color(1f, 0.92f, 0.016f, 0), Color.red, lerpAmount);
                 outline.ChangeColor(newColor);
             }
         }
