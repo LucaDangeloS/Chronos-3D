@@ -165,6 +165,19 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Attack();
+        }
+
+
+         private void Attack()
+        {
+            if (_input.attack && !_input.sprint)
+            {
+                _animator.SetBool("Attack", _input.attack);
+            } else
+            {
+                _animator.SetBool("Attack", false);
+            }
         }
 
         private void LateUpdate()

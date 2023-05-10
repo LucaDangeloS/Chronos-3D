@@ -55,7 +55,7 @@ public class Enemies : MonoBehaviour
                 var lookPos = player.position - transform.position;
                 lookPos.y = 0;
                 var rotation = Quaternion.LookRotation(lookPos);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 0.1f * timeScale);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
                 animator.SetBool("walk", false);
                 animator.SetBool("run", true);
                 transform.Translate(Vector3.forward * 3 * Time.deltaTime * timeScale);
