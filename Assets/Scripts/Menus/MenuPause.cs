@@ -17,6 +17,7 @@ public class MenuPause : MonoBehaviour
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
+            Debug.Log("pausa");
             if (menuPause.activeSelf || menuOptions.activeSelf) {
                 Resume();
             } else {
@@ -46,6 +47,11 @@ public class MenuPause : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         // Application.LoadLevel(Application.loadedLevel);
         //  SceneManager.LoadScene("Level2");
+    }
+
+    public void goToMenu() {
+        SceneManager.LoadScene("mainMenu");
+
     }
 
 }
