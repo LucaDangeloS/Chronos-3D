@@ -11,7 +11,6 @@ public class MainMenu : MonoBehaviour {
     public Slider Slider;
 
     public void PlayGame() {
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         StartCoroutine(CargarAsync());
     }
 
