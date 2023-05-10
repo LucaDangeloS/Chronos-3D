@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - MenuMusic
+  - CinemachineTarget
+  - Rock
   layers:
   - Default
   - TransparentFX

@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Enemies : MonoBehaviour
 {
-    public int routine;
-    public float timer;
-    public Animator animator;
-    public Quaternion angle;
-    public float grade;
+    private float grade;
+    private int routine;
+    private float timer;
+    private Animator animator;
+    private Quaternion angle;
+    private Tween movementTween;
+    private Tween rotationTween;
+
     public float minChaseD = 20;
     public int  enemyLife = 100;
+    public float timeScale;
 
     public Transform player;
     // Start is called before the first frame update
@@ -34,14 +39,14 @@ public class Enemies : MonoBehaviour
                 case 0: 
                     animator.SetBool("walk", false);
                     break;
-                case 1: 
+                case 1:
                     grade = Random.Range(0, 360);
                     angle = Quaternion.Euler(0, grade, 0);
                     routine++;
                     break;
-                case 2: 
+                case 2:
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, angle, 0.5f);
-                    transform.Translate(Vector3.forward * 1 * Time.deltaTime);
+                    transform.Translate(Vector3.forward * 1 * Time.deltaTime * timeScale);
                     animator.SetBool("walk", true);
                     break;
             }
@@ -50,10 +55,10 @@ public class Enemies : MonoBehaviour
                 var lookPos = player.position - transform.position;
                 lookPos.y = 0;
                 var rotation = Quaternion.LookRotation(lookPos);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 0.1f * timeScale);
                 animator.SetBool("walk", false);
                 animator.SetBool("run", true);
-                transform.Translate(Vector3.forward * 3 * Time.deltaTime);
+                transform.Translate(Vector3.forward * 3 * Time.deltaTime * timeScale);
                 animator.SetBool("attack", false);
             } else {
                 animator.SetBool("walk", false);
@@ -75,6 +80,11 @@ public class Enemies : MonoBehaviour
     }
 
     void Update(){
+        animator.speed = timeScale;
+        if (rotationTween != null)
+            rotationTween.timeScale = timeScale;
+        if (movementTween != null)
+            movementTween.timeScale = timeScale;
         enemyBehavior();
     }
 }

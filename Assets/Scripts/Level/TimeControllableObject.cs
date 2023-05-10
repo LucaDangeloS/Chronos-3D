@@ -12,11 +12,13 @@ public class TimeControllableObject : MonoBehaviour
 
     private Rigidbody rb;
     private Outline outline;
+
     private bool hasGravity = false;
     private Vector3 gravity = Physics.gravity;
     private Vector3 prevVelocity = Vector3.zero;
     private Vector3 velocityDelta = Vector3.zero;
 
+    private float initialSlowDown;
     // Still buggy with object forces
     // Still need to stop the object rotation
     void Start()
@@ -30,6 +32,7 @@ public class TimeControllableObject : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             SetTimeScale(0.05f);
+            initialSlowDown = 0.05f;
         }
     }
     void FixedUpdate()
@@ -41,12 +44,16 @@ public class TimeControllableObject : MonoBehaviour
         
         if (timeScale != 1f)
         {
+            // Reescale valocity
             velocityDelta = rb.velocity - prevVelocity;
             rb.velocity = prevVelocity + (velocityDelta * timeScale);
             if (hasGravity)
             {
                 rb.AddForce(gravity * timeScale, ForceMode.Acceleration);
             }
+
+            // Reescale rotation speed
+            rb.angularVelocity *= timeScale;
 
             // Gradually return timeScale to 1f
             if (Mathf.Abs(timeScale - 1f) < timeStep)
@@ -75,8 +82,8 @@ public class TimeControllableObject : MonoBehaviour
                 prevVelocity *= newTime;
             } else
             {
-                rb.velocity *= (1 + (timeScale - newTime));
-                prevVelocity *= (1 + (timeScale - newTime));
+                rb.velocity *= (1 + (timeScale - newTime) / initialSlowDown);
+                prevVelocity *= (1 + (timeScale - newTime) / initialSlowDown);
             }
             timeScale = newTime;
             if (outline != null)
