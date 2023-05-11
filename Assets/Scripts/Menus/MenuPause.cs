@@ -14,6 +14,10 @@ public class MenuPause : MonoBehaviour
     public StarterAssetsInputs inputController;
     public ThirdPersonController playerController;
 
+    private void Start() {
+        Time.timeScale = 1f;
+    }
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (menuPause.activeSelf || menuOptions.activeSelf) {
@@ -40,16 +44,11 @@ public class MenuPause : MonoBehaviour
 
 
     public void Retry() {
-        Time.timeScale = 0f;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        // Application.LoadLevel(Application.loadedLevel);
-        //  SceneManager.LoadScene("Level2");
     }
 
     public void goToMenu() {
         SceneManager.LoadScene("mainMenu");
-
     }
 
 }
