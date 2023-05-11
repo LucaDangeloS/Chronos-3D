@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttachToPlatform : MonoBehaviour
 {
-    private GameObject entity;
+    private List<GameObject> entities;
     private Vector3 lastPosition;
 
     void Start()
@@ -14,12 +14,12 @@ public class AttachToPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (entity != null)
+        if (entities != null)
         {
             Vector3 positionDelta = transform.position - lastPosition;
-            if (Mathf.Abs(positionDelta.magnitude) > 0.0001f && entity != null)
+            if (Mathf.Abs(positionDelta.magnitude) > 0.0001f && entities != null)
             {
-                entity.transform.position += positionDelta;
+                entities.ForEach(e => { e.transform.position += positionDelta; });
             }
         }
         lastPosition = transform.position;
@@ -28,18 +28,18 @@ public class AttachToPlatform : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         Debug.Log("asdasd");
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemies"))
         {
-            entity = collision.gameObject;
+            entities.Add(collision.gameObject);
             lastPosition = transform.position;
         }
     }
 
     void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemies"))
         {
-            entity = null;
+            entities.Remove(collision.gameObject);
         }
     }
 }
