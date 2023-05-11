@@ -17,7 +17,6 @@ public class MenuPause : MonoBehaviour
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            Debug.Log("pausa");
             if (menuPause.activeSelf || menuOptions.activeSelf) {
                 Resume();
             } else {
