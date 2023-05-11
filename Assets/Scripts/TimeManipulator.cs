@@ -1,12 +1,15 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TimeManipulator : MonoBehaviour
 {
-    public float timeScale = 1f;
+    public float slowDownScale = 0.05f;
+    public float cooldown = 5f;
+    public float radius = 15f;
 
     private void OnEnable()
     {
@@ -22,22 +25,43 @@ public class TimeManipulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.LeftControl)) {
-        //    SetTime(0.2f);
-        //} else if (Input.GetKeyDown(KeyCode.LeftAlt)) {
-        //    SetTime(1f);
-        //}
-        Time.timeScale = timeScale;
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            slowDownObjects(getSphereOfEffect(radius));
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            slowDownObjects(getSphereOfEffect(radius));
+        }
     }
 
-    public void SetTime(float slowFactor)
+    ITimeControllable[] getSphereOfEffect(float radius)
     {
-        timeScale = slowFactor;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        List<ITimeControllable> affectedObjects = new List<ITimeControllable>();
+
+        foreach (Collider collider in colliders)
+        {
+            ITimeControllable timeControllableGameObject = collider.GetComponent<ITimeControllable>();
+            if (timeControllableGameObject != null)
+            {
+                affectedObjects.Add(timeControllableGameObject);
+            }
+        }
+
+        return affectedObjects.ToArray();
+    }
+
+    void slowDownObjects(ITimeControllable[] affectedObjects)
+    {
+        foreach (ITimeControllable timeControllable in affectedObjects)
+        {
+            timeControllable.SetTimeScale(slowDownScale);
+        }
     }
 }

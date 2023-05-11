@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using DG.Tweening;
 
-public class TimeControllableEnemy : MonoBehaviour
+public class TimeControllableEnemy : MonoBehaviour, ITimeControllable
 {
     public float timeScale = 1f;
     public float duration = 10f;

@@ -13,7 +13,6 @@ public class MenuPause : MonoBehaviour
     public CinemachineVirtualCamera cameraController;
     public StarterAssetsInputs inputController;
     public ThirdPersonController playerController;
-    public TimeManipulator timeManipulator;
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -28,20 +27,20 @@ public class MenuPause : MonoBehaviour
     // Start is called before the first frame update
     public void Pause() {
         inputController.setGamePaused(true);
-        timeManipulator.SetTime(0f);
+        Time.timeScale = 0f;
         menuPause.SetActive(true);
     }
 
     public void Resume() {
         inputController.setGamePaused(false);
-        timeManipulator.SetTime(1f);
+        Time.timeScale = 1f;
         menuPause.SetActive(false);
         menuOptions.SetActive(false);
     }
 
 
     public void Retry() {
-        timeManipulator.SetTime(0f);
+        Time.timeScale = 0f;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         // Application.LoadLevel(Application.loadedLevel);
