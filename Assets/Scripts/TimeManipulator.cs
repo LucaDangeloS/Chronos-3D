@@ -30,11 +30,11 @@ public class TimeManipulator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             slowDownObjects(getSphereOfEffect(radius));
         }
-        else if (Input.GetKeyDown(KeyCode.LeftAlt))
+        else if (Input.GetKeyDown(KeyCode.F))
         {
             slowDownObjects(getSphereOfEffect(radius));
         }

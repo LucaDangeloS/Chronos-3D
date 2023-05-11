@@ -28,13 +28,7 @@ public class TimeControllableEnemy : MonoBehaviour, ITimeControllable
         outline = GetComponent<Outline>();
         hasGravity = rb.useGravity;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SetTimeScale(0.05f);
-        }
-    }
+
     void FixedUpdate()
     {
         if (rb == null)

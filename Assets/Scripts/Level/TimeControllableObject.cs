@@ -19,22 +19,15 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
     private Vector3 velocityDelta = Vector3.zero;
 
     private float initialSlowDown;
-    // Still buggy with object forces
-    // Still need to stop the object rotation
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         outline = GetComponent<Outline>();
         hasGravity = rb.useGravity;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SetTimeScale(0.05f);
-            initialSlowDown = 0.05f;
-        }
-    }
+
     void FixedUpdate()
     {
         if (rb == null)
@@ -78,6 +71,7 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
             rb.useGravity = false;
             if (firstSet)
             {
+                initialSlowDown = newTime;
                 rb.velocity *= newTime;
                 prevVelocity *= newTime;
             } else
