@@ -16,6 +16,7 @@ public class Enemies : MonoBehaviour
     public float minChaseD = 20;
     public int  enemyLife = 100;
     public float timeScale;
+    private bool hasAttacked = false;
 
     public Transform player;
     // Start is called before the first frame update
@@ -60,22 +61,17 @@ public class Enemies : MonoBehaviour
                 animator.SetBool("run", true);
                 transform.Translate(Vector3.forward * 3 * Time.deltaTime * timeScale);
                 animator.SetBool("attack", false);
+                hasAttacked = false;
             } else {
                 animator.SetBool("walk", false);
                 animator.SetBool("run", false);
                 animator.SetBool("attack", true);
+                if (!hasAttacked) { 
+                    player.GetComponent<Damage>().TakeDamage(10);
+                    hasAttacked = true;
+                }
               
             }
-        }
-    }
-
-    public void TakeDamage(int dAmount) {
-        enemyLife -= dAmount;
-        if(enemyLife <= 0) {
-            animator.SetTrigger("die");
-            GetComponent<Collider>().enabled = false;
-        } else {
-            animator.SetTrigger("damage");
         }
     }
 

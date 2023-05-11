@@ -5,14 +5,24 @@ using UnityEngine;
 public class PlayerSword : MonoBehaviour
 {
   
+    public bool isAttack;
+  
     private void OnTriggerEnter(Collider other) 
     {
-
-        if(other.tag == "Enemies")
+        if(other.tag == "Enemies" && isAttack)
         {
-            other.GetComponent<Enemies>().TakeDamage(20);
+            other.GetComponent<Damage>().TakeDamage(20);
         }
+        isAttack = false;
 
     }
-    
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            isAttack = true;
+        }
+        
+    }
 }
