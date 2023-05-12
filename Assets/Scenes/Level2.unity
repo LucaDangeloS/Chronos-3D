@@ -2631,6 +2631,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8534493679049526610, guid: 08ce853a75d70fc4c82cbf0f7fe506fe,
         type: 3}
+      propertyPath: Slider
+      value: 
+      objectReference: {fileID: 1863376259}
+    - target: {fileID: 8534493679049526610, guid: 08ce853a75d70fc4c82cbf0f7fe506fe,
+        type: 3}
+      propertyPath: chargeWallpaper
+      value: 
+      objectReference: {fileID: 912247433}
+    - target: {fileID: 8534493679049526610, guid: 08ce853a75d70fc4c82cbf0f7fe506fe,
+        type: 3}
       propertyPath: playerParticles
       value: 
       objectReference: {fileID: 1573793875}
