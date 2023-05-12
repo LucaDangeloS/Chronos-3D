@@ -73,10 +73,8 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
 
     public virtual void SetTimeScale(float newTime, bool firstSet = true)
     {
-        Debug.Log("Entered");
         if (rb == null || (firstSet && cooldownTimer > 0))
         {
-            Debug.Log("In cooldown");
             return;
         }
 

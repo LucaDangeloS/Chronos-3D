@@ -55,7 +55,6 @@ public class TimeManipulator : MonoBehaviour
         int layerMask = ~(1 << ignoreRaycastLayer);
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, range, layerMask))
         {
-            Debug.Log(hit.collider);
             if (hit.collider.TryGetComponent<ITimeControllable>(out var timeControllableGameObject))
             {
                 return timeControllableGameObject;
