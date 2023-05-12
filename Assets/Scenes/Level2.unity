@@ -9776,6 +9776,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1015459573}
     m_Modifications:
+    - target: {fileID: 7452278777754076586, guid: 17e8c5c4a5f0f5d47a9d53ac2490b7d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7452278777754076586, guid: 17e8c5c4a5f0f5d47a9d53ac2490b7d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 409148019}
+    - target: {fileID: 7452278777754076586, guid: 17e8c5c4a5f0f5d47a9d53ac2490b7d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: goToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7452278777754076586, guid: 17e8c5c4a5f0f5d47a9d53ac2490b7d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuPause, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7452278777842067434, guid: 17e8c5c4a5f0f5d47a9d53ac2490b7d9,
         type: 3}
       propertyPath: m_AnchorMax.x
