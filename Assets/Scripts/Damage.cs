@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+//Clase para gestionar la vida, la barra de vida y el daño recibido de jugadores y de enemigos.
 public class Damage : MonoBehaviour
 {
     private int life = 100;
@@ -28,6 +29,7 @@ public class Damage : MonoBehaviour
     }
 
 
+    //Recibir daño
     public void TakeDamage(int dAmount) {
         if (hitSound != null) {
         hitSound.Play();
@@ -43,10 +45,9 @@ public class Damage : MonoBehaviour
                 Destroy(gameObject,1.5f);
                 return;
             }
-
+            //Cuando muere el jugador, damos 3 segundos de "margen" para poder ver la animación de muerte y luego se activa la pantalla de pausa.
             StartCoroutine(DelayGameOverScreen(3f));
             inputController.setGamePaused(true);
-
 
         } else {
             animator.SetTrigger("damage");
