@@ -11,7 +11,7 @@ public class PlayerSword : MonoBehaviour
     {
         if(other.tag == "Enemies" && isAttack)
         {
-            other.GetComponent<Damage>().TakeDamage(200);
+            other.GetComponent<Damage>().TakeDamage(20);
         }
         isAttack = false;
 
