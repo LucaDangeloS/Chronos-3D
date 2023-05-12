@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TransitionSmoothWaypointMovement : ObjSmoothWaypointMovement
 {
+    // Force the object to move to a specific point and stop all other movement to keep it stable
     public void ForceMove(Vector3 point)
     {
         transform.DOMove(point, speed)
@@ -13,6 +14,7 @@ public class TransitionSmoothWaypointMovement : ObjSmoothWaypointMovement
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+        // Remove it's rigidbody to avoid physics
         Destroy(rb);
         rotationTween.Pause();
     }

@@ -8,6 +8,8 @@ public class ObjSmoothWaypointMovement : ObjWaypointMovement
     [Header("Duration does not work here, set speed instead")]
     public float speed = 10f;
 
+    // Change the movement of the Tween to make a Path movement between it's waypoints
+    // following a Catmull-Rom spline
     public override void MoveToNextWaypoint()
     {
         if (waypoints.Count == 0)

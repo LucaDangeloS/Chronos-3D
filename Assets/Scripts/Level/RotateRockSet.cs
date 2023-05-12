@@ -47,7 +47,7 @@ public class RotateRockSet : MonoBehaviour, ITimeControllable, IRewindable
 
     private void Rotate()
     {
-        // slow rotate rock sets
+        // slowly rotate rock sets
         rotationTween = transform.DOLocalRotate(rotationComponent, 25f / rotationSpeed, RotateMode.LocalAxisAdd)
             .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Incremental)
@@ -61,6 +61,7 @@ public class RotateRockSet : MonoBehaviour, ITimeControllable, IRewindable
         HighlightObject();
     }
 
+    // Highlights all the children objects
     protected void HighlightObject()
     {
         Outline[] outlines = GetComponentsInChildren<Outline>();
@@ -83,6 +84,7 @@ public class RotateRockSet : MonoBehaviour, ITimeControllable, IRewindable
         rotationTween.PlayForward();
     }
 
+    // Updated the recordedTime
     public void UpdateCooldown()
     {
         if (isRewinding && recordedTime > 0f)

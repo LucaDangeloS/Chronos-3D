@@ -41,7 +41,7 @@ public class ObjWaypointMovement : MonoBehaviour, IRewindable
     private void Update()
     {
         UpdateCooldown();
-
+        // Overwrites the timeScale of the internal Tweens with the one in the TimeControllableObject script
         if ((isTimeControllable && objTimeScale != timeControllableObject.timeScale))
         {
             objTimeScale = timeControllableObject.timeScale;
@@ -52,6 +52,7 @@ public class ObjWaypointMovement : MonoBehaviour, IRewindable
         }
     }
 
+    // Moves the object to the next waypoint in the list and loops back to the first waypoint when the end of the list is reached
     public virtual void MoveToNextWaypoint()
     {;
         if (currentWaypoint >= waypoints.Count)
@@ -67,6 +68,7 @@ public class ObjWaypointMovement : MonoBehaviour, IRewindable
         currentWaypoint %= waypoints.Count;
     }
 
+    // Adds a constant rotation to the object to make it more interesting
     public virtual void Rotate()
     {
         rotationTween = transform.DORotate(new Vector3(rotateZcomponent, rotateXcomponent, rotateYcomponent), 10f / rotateSpeed, RotateMode.LocalAxisAdd)
