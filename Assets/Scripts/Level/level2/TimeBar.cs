@@ -16,9 +16,6 @@ public class TimeBar : MonoBehaviour
     public GameObject gameOverScreen;
     public StarterAssetsInputs inputController;
 
-
-
-
     public void SetMaxTime(int time) {
         slider.maxValue = time;
         slider.value = time;
@@ -46,15 +43,8 @@ public class TimeBar : MonoBehaviour
         onEnd();
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-
 
     private void onEnd() {
-        Debug.Log("End count");
         inputController.setGamePaused(true);
         Time.timeScale = 0f;
         gameOverScreen.SetActive(true);
