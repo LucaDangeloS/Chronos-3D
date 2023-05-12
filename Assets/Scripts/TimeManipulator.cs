@@ -36,24 +36,26 @@ public class TimeManipulator : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            //ITimeControllable target = getRayCastCollide(radius * 1.5f);
-            //if (target != null)
-            //{
-            //    Debug.Log("Raycast hit: " + target);
-            //    slowDownObject(target);
-            //} else
-            //{
-                Debug.Log("Sphere of effect");
+            ITimeControllable target = getRayCastCollide(radius * 2f);
+            if (target != null)
+            {
+                slowDownObject(target);
+            }
+            else
+            {
                 slowDownObjects(getSphereOfEffect(radius));
-            //}
+            }
             cooldownTimer = cooldown;
         }
     }
 
     ITimeControllable getRayCastCollide(float range)
     {
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, range))
+        int ignoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
+        int layerMask = ~(1 << ignoreRaycastLayer);
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, range, layerMask))
         {
+            Debug.Log(hit.collider);
             if (hit.collider.TryGetComponent<ITimeControllable>(out var timeControllableGameObject))
             {
                 return timeControllableGameObject;
@@ -82,7 +84,6 @@ public class TimeManipulator : MonoBehaviour
     {
         foreach (ITimeControllable timeControllable in affectedObjects)
         {
-            Debug.Log(timeControllable);
             timeControllable.SetTimeScale(slowDownScale);
         }
     }

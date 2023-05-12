@@ -48,7 +48,11 @@ public class RotateRockSet : MonoBehaviour, ITimeControllable
     {
         timeScale = newTime;
         rotationTween.timeScale = timeScale;
-        // Get all outline components from children
+        HighlightObject();
+    }
+
+    protected void HighlightObject()
+    {
         Outline[] outlines = GetComponentsInChildren<Outline>();
         foreach (Outline outline in outlines)
         {
