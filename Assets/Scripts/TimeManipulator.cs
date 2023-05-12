@@ -2,20 +2,20 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TimeManipulator : MonoBehaviour
 {
     public float slowDownScale = 0.05f;
-    public float cooldown = 3f;
-    public float cooldownTimer = 0f;
+    public float cooldown = 2f;
+    protected float cooldownTimer = 0f;
     public float radius = 15f;
     public Camera playerCamera;
 
     private void OnEnable()
     {
-        playerCamera = GetComponentInChildren<Camera>();
     }
 
     private void OnDisable()
@@ -36,24 +36,25 @@ public class TimeManipulator : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            //Debug.Log(getRayCastCollide(40f));
-            slowDownObjects(getSphereOfEffect(radius));
+            //ITimeControllable target = getRayCastCollide(radius * 1.5f);
+            //if (target != null)
+            //{
+            //    Debug.Log("Raycast hit: " + target);
+            //    slowDownObject(target);
+            //} else
+            //{
+                Debug.Log("Sphere of effect");
+                slowDownObjects(getSphereOfEffect(radius));
+            //}
             cooldownTimer = cooldown;
         }
     }
 
     ITimeControllable getRayCastCollide(float range)
     {
-        // Get the raycast hit object from the center of the player camera
-        // from where the player is looking
-        RaycastHit hit;
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0, 0, range));
-        // Debug draw ray
-        Debug.DrawRay(ray.origin, ray.direction * range, Color.yellow);
-        if (Physics.Raycast(ray, out hit, range))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, range))
         {
-            ITimeControllable timeControllableGameObject = hit.collider.GetComponent<ITimeControllable>();
-            if (timeControllableGameObject != null)
+            if (hit.collider.TryGetComponent<ITimeControllable>(out var timeControllableGameObject))
             {
                 return timeControllableGameObject;
             }
@@ -65,7 +66,6 @@ public class TimeManipulator : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         List<ITimeControllable> affectedObjects = new List<ITimeControllable>();
-
         foreach (Collider collider in colliders)
         {
             ITimeControllable timeControllableGameObject = collider.GetComponent<ITimeControllable>();
@@ -82,7 +82,13 @@ public class TimeManipulator : MonoBehaviour
     {
         foreach (ITimeControllable timeControllable in affectedObjects)
         {
+            Debug.Log(timeControllable);
             timeControllable.SetTimeScale(slowDownScale);
         }
+    }
+
+    void slowDownObject(ITimeControllable affectedObject)
+    {
+        affectedObject.SetTimeScale(slowDownScale);
     }
 }

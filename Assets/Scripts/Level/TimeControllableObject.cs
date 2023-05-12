@@ -9,13 +9,13 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
     public float timeScale = 1f;
     public float duration = 10f;
     public float cooldown = 3f;
-    private float cooldownTimer = 0f;
+    protected float cooldownTimer = 0f;
     private float timeStep = 0.05f;
 
-    private Rigidbody rb;
-    private Outline outline;
+    protected Rigidbody rb;
+    protected Outline outline;
+    protected bool hasGravity = false;
 
-    private bool hasGravity = false;
     private Vector3 gravity = Physics.gravity;
     private Vector3 prevVelocity = Vector3.zero;
     private Vector3 velocityDelta = Vector3.zero;
@@ -35,7 +35,7 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
         UpdateTimeScale();
     }
 
-    protected void UpdateTimeScale()
+    protected virtual void UpdateTimeScale()
     {
         if (cooldownTimer > 0)
         {
@@ -71,10 +71,12 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
         prevVelocity = rb.velocity;
     }
 
-    public void SetTimeScale(float newTime, bool firstSet = true)
+    public virtual void SetTimeScale(float newTime, bool firstSet = true)
     {
+        Debug.Log("Entered");
         if (rb == null || (firstSet && cooldownTimer > 0))
         {
+            Debug.Log("In cooldown");
             return;
         }
 
@@ -94,9 +96,7 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
             timeScale = newTime;
             if (outline != null)
             {
-                float lerpAmount = Mathf.Clamp01((1f - timeScale) / 0.5f);
-                Color newColor = Color.Lerp(new Color(1f, 0.92f, 0.016f, 0), Color.red, lerpAmount);
-                outline.ChangeColor(newColor);
+                HighlightObject();
             }
             cooldownTimer = cooldown;
         }
@@ -107,7 +107,14 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
             prevVelocity = prevVelocity / timeScale;
             timeScale = 1f;
             if (outline != null)
-                outline.ChangeColor(new Color(0, 0, 0, 0));
+                HighlightObject();
         }
+    }
+
+    protected virtual void HighlightObject()
+    {
+        float lerpAmount = Mathf.Clamp01((1f - timeScale) / 0.5f);
+        Color newColor = Color.Lerp(new Color(1f, 0.92f, 0.016f, 0), Color.red, lerpAmount);
+        outline.ChangeColor(newColor);
     }
 }

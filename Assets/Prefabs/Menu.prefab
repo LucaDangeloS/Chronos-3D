@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7452278778866503599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,7 +1275,6 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   inputController: {fileID: 0}
   playerController: {fileID: 0}
-  timeManipulator: {fileID: 0}
 --- !u!1 &7452278778900158893
 GameObject:
   m_ObjectHideFlags: 0
