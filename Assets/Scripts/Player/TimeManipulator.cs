@@ -38,11 +38,13 @@ public class TimeManipulator : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
+            // First check if we are looking at an object that can be slowed down
             ITimeControllable target = getRayCastCollide(radius * 2f);
             if (target != null)
             {
                 slowDownObject(target);
             }
+            // If not, slow down all objects in a sphere of effect
             else
             {
                 slowDownObjects(getSphereOfEffect(radius));
