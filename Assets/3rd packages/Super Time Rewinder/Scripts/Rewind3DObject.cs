@@ -35,20 +35,6 @@ namespace LunarCatsStudio.SuperRewinder {
 			if(m_rigidBody != null)
 				m_rigidBody.isKinematic = true;
 		}
-		// TODO: Remove
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-				Debug.Log("Rewimding");
-                StartRewind();
-            }
-			if (Input.GetKeyUp(KeyCode.R))
-			{
-                Debug.Log("Stop arer");
-                StopRewind();
-			}
-        }
 
         /// <summary>
         /// Stops the rewind.

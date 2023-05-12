@@ -22,17 +22,6 @@ public class LimitedRewind3DObject : LimitedRewindObject
         if (m_rigidBody != null)
             m_rigidBody.isKinematic = true;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartRewind();
-        }
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            StopRewind();
-        }
-    }
 
     /// <summary>
     /// Stops the rewind.

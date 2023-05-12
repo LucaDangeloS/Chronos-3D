@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using DG.Tweening;
+using LunarCatsStudio.SuperRewinder;
+using System.Linq;
+using System.Collections.Generic;
 
 public class TimeControllableObject : MonoBehaviour, ITimeControllable
 {
@@ -22,13 +22,14 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
 
     private float initialSlowDown;
 
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         outline = GetComponent<Outline>();
         hasGravity = rb.useGravity;
     }
+
 
     void FixedUpdate()
     {
