@@ -40,11 +40,6 @@ public class ObjWaypointMovement : MonoBehaviour, IRewindable
 
     private void Update()
     {
-        // TODO: Remove
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Rewind();
-        }
         UpdateCooldown();
 
         if ((isTimeControllable && objTimeScale != timeControllableObject.timeScale))

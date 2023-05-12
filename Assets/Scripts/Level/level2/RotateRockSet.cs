@@ -25,13 +25,8 @@ public class RotateRockSet : MonoBehaviour, ITimeControllable, IRewindable
         Rotate();
     }
 
-    // TODO: Remove
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Rewind();
-        }
         UpdateCooldown();
     }
 

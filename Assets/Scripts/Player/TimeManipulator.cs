@@ -1,10 +1,7 @@
-using StarterAssets;
-using System.Collections;
+using LunarCatsStudio.SuperRewinder;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class TimeManipulator : MonoBehaviour
 {
@@ -14,8 +11,13 @@ public class TimeManipulator : MonoBehaviour
     public float radius = 15f;
     public Camera playerCamera;
 
+    private List<IRewindable> rewindableObjects;
+    private List<RewindObject> rewindableObjects2;
+
     private void OnEnable()
     {
+        rewindableObjects = new List<IRewindable>(FindObjectsOfType<MonoBehaviour>().OfType<IRewindable>());
+        rewindableObjects2 = new List<RewindObject>(FindObjectsOfType<MonoBehaviour>().OfType<RewindObject>());
     }
 
     private void OnDisable()
@@ -46,6 +48,16 @@ public class TimeManipulator : MonoBehaviour
                 slowDownObjects(getSphereOfEffect(radius));
             }
             cooldownTimer = cooldown;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            rewindableObjects.ForEach(obj => { obj.Rewind(); });
+            rewindableObjects2.ForEach(obj => { obj.StartRewind(); });
+        }
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            rewindableObjects.ForEach(obj => { obj.StopRewind(); });
+            rewindableObjects2.ForEach(obj => { obj.StopRewind(); });
         }
     }
 
