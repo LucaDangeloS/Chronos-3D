@@ -3805,8 +3805,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8594398, y: 3.132246, z: 11.408209}
-  m_Center: {x: 0.13119698, y: 1.066123, z: 0.79187334}
+  m_Size: {x: 2.8594398, y: 3.1322463, z: 9.933806}
+  m_Center: {x: 0.13119699, y: 1.0661228, z: 0.05467017}
 --- !u!95 &1428038090 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9581600, guid: aeb4794909bc89d43b72ad784903e0f5,
