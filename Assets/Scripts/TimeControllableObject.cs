@@ -64,7 +64,7 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
                 rb.AddForce(gravity * timeScale, ForceMode.Acceleration);
             }
 
-            // Don't forget to reescale angular valocity too
+            // Don't forget to reescale angular velocity too
             rb.angularVelocity *= timeScale;
 
             // Gradually return timeScale to 1f doing checks to avoid floating point errors

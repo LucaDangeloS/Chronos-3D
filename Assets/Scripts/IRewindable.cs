@@ -10,5 +10,6 @@ public interface IRewindable
 
     void Rewind();
     void StopRewind();
+    // Method to update the recordedTime variable
     public void UpdateCooldown();
 }

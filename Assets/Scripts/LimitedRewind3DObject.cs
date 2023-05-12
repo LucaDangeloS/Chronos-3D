@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class LimitedRewind3DObject : LimitedRewindObject
 {
+    // This changes the base class to be able to control when an object should register keypoints
+    // this allows to return the bridge in level1 without the risk of accidentally losing the time frame
+    // the bridge can be rewinded to the point where it can be crossed
+
+    // The flag that allows for the object position recording is controlled externally through other scripts (level1 scripts)
+
     #region Settings
     //[Tooltip("Keep Velocity after end of rewind")]
     //public bool m_keepVelocity = true;
