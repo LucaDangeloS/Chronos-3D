@@ -21,9 +21,8 @@ public class OptionsMenu : MonoBehaviour
 
 
     void Start() {
-        slider.value = PlayerPrefs.GetFloat("menuMusic", 0.5f);
+        slider.value = PlayerPrefs.GetFloat("menuMusic", 1f);
         AudioListener.volume = slider.value;
-        checkMute();
 
         checkResolution();
     }
@@ -37,15 +36,6 @@ public class OptionsMenu : MonoBehaviour
         sliderValue = value;
         PlayerPrefs.SetFloat("menuMusic", sliderValue);
         AudioListener.volume = slider.value;
-        checkMute();
-    }
-
-    public void checkMute() {
-        if (sliderValue == 0) {
-            //image true
-        } else {
-            // image false
-        }
     }
 
 
@@ -56,6 +46,9 @@ public class OptionsMenu : MonoBehaviour
         int currentResolution = 0;
 
         for (int i = 0; i < resolutions.Length; i++) {
+            if (resolutions[i].width < 600) {
+                continue;
+            }
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
