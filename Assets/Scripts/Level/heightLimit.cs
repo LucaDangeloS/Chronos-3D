@@ -17,6 +17,8 @@ public class heightLimit : MonoBehaviour
             inputController.setGamePaused(true);
             Time.timeScale = 0f;
             gameOverScreen.SetActive(true);
+        } else {
+            Destroy(collider.gameObject,1.5f);
         }
     }
 
