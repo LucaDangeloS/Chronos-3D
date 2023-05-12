@@ -9,7 +9,7 @@ public class RotateRockSet : MonoBehaviour, ITimeControllable, IRewindable
 {
     public float rotationSpeed = 3f;
     public float timeScale = 1f;
-    public float duration = 16f;
+    public float slowDuration = 16f;
     public Vector3 rotationComponent = new Vector3(360, 0, 0);
     private Tween rotationTween;
     private float timeStep = 0.05f;
@@ -39,9 +39,9 @@ public class RotateRockSet : MonoBehaviour, ITimeControllable, IRewindable
             if (Mathf.Abs(timeScale - 1f) < timeStep)
                 SetTimeScale(1f, false);
             else if (timeScale < 1f)
-                SetTimeScale(timeScale + (timeStep / duration), false);
+                SetTimeScale(timeScale + (timeStep / slowDuration), false);
             else if (timeScale > 1f)
-                SetTimeScale(timeScale - (timeStep / duration), false);
+                SetTimeScale(timeScale - (timeStep / slowDuration), false);
         }
     }
 
