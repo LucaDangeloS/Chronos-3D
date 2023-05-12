@@ -45,22 +45,17 @@ public class ObjWaypointMovement : MonoBehaviour, IRewindable
         if ((isTimeControllable && objTimeScale != timeControllableObject.timeScale))
         {
             objTimeScale = timeControllableObject.timeScale;
-            movementTween.timeScale = objTimeScale;
-            rotationTween.timeScale = objTimeScale;
+            if (movementTween != null)
+                movementTween.timeScale = objTimeScale;
+            if (rotationTween != null)
+                rotationTween.timeScale = objTimeScale;
         }
     }
 
     public virtual void MoveToNextWaypoint()
-    {
+    {;
         if (currentWaypoint >= waypoints.Count)
-        {
-            // create empty tween
-            movementTween = transform.DOMove(transform.position, duration)
-                .SetEase(Ease.InOutQuad)
-                .SetRecyclable(true)
-                .OnComplete(MoveToNextWaypoint);
             return;
-        }
 
         movementTween = transform.DOMove(waypoints[currentWaypoint].transform.position, duration)
             .SetEase(Ease.InOutQuad)
@@ -84,14 +79,14 @@ public class ObjWaypointMovement : MonoBehaviour, IRewindable
     public void Rewind()
     {
         isRewinding = true;
-        rotationTween.PlayBackwards();
-        movementTween.PlayBackwards();
+        movementTween?.PlayBackwards();
+        rotationTween?.PlayBackwards();
     }
 
     public void StopRewind()
     {
-        movementTween.PlayForward();
-        rotationTween.PlayForward();
+        movementTween?.PlayForward();
+        rotationTween?.PlayForward();
     }
 
     public void UpdateCooldown()
