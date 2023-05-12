@@ -10,6 +10,8 @@ public class heightLimit : MonoBehaviour
     public GameObject gameOverScreen;
     public StarterAssetsInputs inputController;
 
+    //Detectamos el trigger entre un objeto y el plano que limita la caída del objeto
+    // para eliminarlo.
     public void OnTriggerEnter(Collider collider) {
 
         if (collider.gameObject.CompareTag("Player") ) {
