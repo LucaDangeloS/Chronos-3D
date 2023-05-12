@@ -8,21 +8,20 @@ using UnityEngine.InputSystem;
 public class TimeManipulator : MonoBehaviour
 {
     public float slowDownScale = 0.05f;
-    public float cooldown = 5f;
+    public float cooldown = 3f;
+    public float cooldownTimer = 0f;
     public float radius = 15f;
+    public Camera playerCamera;
 
     private void OnEnable()
     {
-        // Get a reference to the "F" key action
-
+        playerCamera = GetComponentInChildren<Camera>();
     }
 
     private void OnDisable()
     {
-        // Disable the action when the script is disabled
     }
 
-    // Start is called before the first frame update
     void Start()
     {
     }
@@ -30,14 +29,36 @@ public class TimeManipulator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.F))
         {
+            //Debug.Log(getRayCastCollide(40f));
             slowDownObjects(getSphereOfEffect(radius));
+            cooldownTimer = cooldown;
         }
-        else if (Input.GetKeyDown(KeyCode.F))
+    }
+
+    ITimeControllable getRayCastCollide(float range)
+    {
+        // Get the raycast hit object from the center of the player camera
+        // from where the player is looking
+        RaycastHit hit;
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0, 0, range));
+        // Debug draw ray
+        Debug.DrawRay(ray.origin, ray.direction * range, Color.yellow);
+        if (Physics.Raycast(ray, out hit, range))
         {
-            slowDownObjects(getSphereOfEffect(radius));
+            ITimeControllable timeControllableGameObject = hit.collider.GetComponent<ITimeControllable>();
+            if (timeControllableGameObject != null)
+            {
+                return timeControllableGameObject;
+            }
         }
+        return null;
     }
 
     ITimeControllable[] getSphereOfEffect(float radius)

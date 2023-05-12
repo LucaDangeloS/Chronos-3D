@@ -8,6 +8,8 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
 {
     public float timeScale = 1f;
     public float duration = 10f;
+    public float cooldown = 3f;
+    private float cooldownTimer = 0f;
     private float timeStep = 0.05f;
 
     private Rigidbody rb;
@@ -30,11 +32,21 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
 
     void FixedUpdate()
     {
+        UpdateTimeScale();
+    }
+
+    protected void UpdateTimeScale()
+    {
+        if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+
         if (rb == null)
         {
             return;
         }
-        
+
         if (timeScale != 1f)
         {
             // Reescale valocity
@@ -61,7 +73,7 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
 
     public void SetTimeScale(float newTime, bool firstSet = true)
     {
-        if (rb == null)
+        if (rb == null || (firstSet && cooldownTimer > 0))
         {
             return;
         }
@@ -86,6 +98,7 @@ public class TimeControllableObject : MonoBehaviour, ITimeControllable
                 Color newColor = Color.Lerp(new Color(1f, 0.92f, 0.016f, 0), Color.red, lerpAmount);
                 outline.ChangeColor(newColor);
             }
+            cooldownTimer = cooldown;
         }
         else
         {
