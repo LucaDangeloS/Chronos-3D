@@ -14,7 +14,6 @@ public class heightLimit : MonoBehaviour
     public void OnTriggerEnter(Collider collider) {
 
         if (collider.gameObject.CompareTag("Player") ) {
-            Debug.Log("muerete");
             inputController.setGamePaused(true);
             Time.timeScale = 0f;
             gameOverScreen.SetActive(true);
