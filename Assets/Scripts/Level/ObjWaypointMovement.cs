@@ -3,7 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using Unity.VisualScripting;
 
-public class ObjWaypointMovement : MonoBehaviour
+public class ObjWaypointMovement : MonoBehaviour, IRewindable
 {
 
     [SerializeField] protected List<GameObject> waypoints;
@@ -26,6 +26,10 @@ public class ObjWaypointMovement : MonoBehaviour
     protected Tween movementTween;
     protected Tween rotationTween;
 
+    public bool isRewinding { get; set; } = false;
+    public float maxRecordTime { get; set; } = 5f;
+    public float recordedTime { get; set; } = 0f;
+
     private void Start()
     {
         timeControllableObject = GetComponent<TimeControllableObject>();
@@ -36,6 +40,13 @@ public class ObjWaypointMovement : MonoBehaviour
 
     private void Update()
     {
+        // TODO: Remove
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Rewind();
+        }
+        UpdateCooldown();
+
         if ((isTimeControllable && objTimeScale != timeControllableObject.timeScale))
         {
             objTimeScale = timeControllableObject.timeScale;
@@ -73,5 +84,35 @@ public class ObjWaypointMovement : MonoBehaviour
             .SetLoops(-1, LoopType.Incremental)
             .SetRecyclable(true);
         rotationTween.timeScale = objTimeScale;
+    }
+
+    public void Rewind()
+    {
+        isRewinding = true;
+        rotationTween.PlayBackwards();
+        movementTween.PlayBackwards();
+    }
+
+    public void StopRewind()
+    {
+        movementTween.PlayForward();
+        rotationTween.PlayForward();
+    }
+
+    public void UpdateCooldown()
+    {
+        if (isRewinding && recordedTime > 0f)
+        {
+            recordedTime -= Time.deltaTime;
+        }
+        else if (isRewinding)
+        {
+            isRewinding = false;
+            StopRewind();
+        }
+        else if (recordedTime < maxRecordTime)
+        {
+            recordedTime += Time.deltaTime;
+        }
     }
 }

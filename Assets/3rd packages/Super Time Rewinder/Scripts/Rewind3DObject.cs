@@ -35,16 +35,18 @@ namespace LunarCatsStudio.SuperRewinder {
 			if(m_rigidBody != null)
 				m_rigidBody.isKinematic = true;
 		}
+		// TODO: Remove
         private void Update()
         {
-            // Calculate number of frames that need to be skipped bsed on timeController timeScale
             if (Input.GetKeyDown(KeyCode.R))
             {
+				Debug.Log("Rewimding");
                 StartRewind();
             }
 			if (Input.GetKeyUp(KeyCode.R))
 			{
-				StopRewind();
+                Debug.Log("Stop arer");
+                StopRewind();
 			}
         }
 
