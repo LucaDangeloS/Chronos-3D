@@ -14,6 +14,7 @@ public class Damage : MonoBehaviour
 
     public GameObject gameOverScreen; 
     public StarterAssetsInputs inputController;
+    public AudioSource hitSound;
 
     void Start()
     {
@@ -28,6 +29,9 @@ public class Damage : MonoBehaviour
 
 
     public void TakeDamage(int dAmount) {
+        if (hitSound != null) {
+        hitSound.Play();
+        }
         life -= dAmount;
         
         if (healthBar != null) {
