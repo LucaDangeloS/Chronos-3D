@@ -10,6 +10,7 @@ TagManager:
   - Enemies
   - Plane
   - Waypoint
+  - Victory
   layers:
   - Default
   - TransparentFX

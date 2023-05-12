@@ -17,6 +17,7 @@ public class SwitchLevel : MonoBehaviour
     public GameObject chargeWallpaper;
     public Slider Slider;
 
+    //Detecta el jugador en el portal para pasar el siguiente nivel.
     public void OnTriggerEnter(Collider other)
     {
 
@@ -27,6 +28,8 @@ public class SwitchLevel : MonoBehaviour
             StartCoroutine(DelayLoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
         }
     }
+
+    //Detecta salir al jugador en el portal parar el contador para pasar el siguiente nivel.
 
     public void OnTriggerExit(Collider other)
     {
@@ -39,13 +42,14 @@ public class SwitchLevel : MonoBehaviour
 
     public void LoadLevel(int index)
     {
-        // If made async the player inputs have to be disabled
         SceneManager.LoadScene(index);
     }
 
     IEnumerator DelayLoadLevel(int index)
     {
         yield return new WaitForSeconds(transitionDelayTime);
+
+        //si el jugador sale del portal, la cuenta se para, evitando que pase al siguiente nivel
         if (!isInsidePortal) yield break;
 
         chargeWallpaper.SetActive(true);
@@ -54,10 +58,13 @@ public class SwitchLevel : MonoBehaviour
 
     }
 
+    //Función para cargar el siguiente nivel de forma asíncrona.
     public IEnumerator CargarAsync()
     {
         chargeWallpaper.SetActive(true);
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+
+        //Mientras la carga del nivel no esté completa, el porcentaje de carga se va aplicando al slider (barra de carga).
         while (!operation.isDone)
         {
             Debug.Log("cargando??");
