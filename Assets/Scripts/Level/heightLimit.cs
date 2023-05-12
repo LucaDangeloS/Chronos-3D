@@ -10,7 +10,6 @@ public class heightLimit : MonoBehaviour
     public GameObject gameOverScreen;
     public StarterAssetsInputs inputController;
 
-
     public void OnTriggerEnter(Collider collider) {
 
         if (collider.gameObject.CompareTag("Player") ) {
