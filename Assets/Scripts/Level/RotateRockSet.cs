@@ -99,4 +99,9 @@ public class RotateRockSet : MonoBehaviour, ITimeControllable, IRewindable
             recordedTime += Time.deltaTime;
         }
     }
+
+    public void Stop()
+    {
+        rotationTween.Kill();
+    }
 }

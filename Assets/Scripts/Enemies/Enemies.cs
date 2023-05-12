@@ -15,6 +15,7 @@ public class Enemies : MonoBehaviour
     private float timer;
     private Quaternion angle;
     public float minChaseD = 20;
+    private float rotationSpeed = 100f;
 
   
     public float timeScale;
@@ -59,7 +60,7 @@ public class Enemies : MonoBehaviour
                     routine++;
                     break;
                 case 2:
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, angle, 0.5f);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, angle, rotationSpeed * timeScale * Time.deltaTime);
                     transform.Translate(Vector3.forward * 1 * Time.deltaTime * timeScale);
                     animator.SetBool("walk", true);
                     break;
@@ -69,7 +70,7 @@ public class Enemies : MonoBehaviour
                 var lookPos = player.position - transform.position;
                 lookPos.y = 0;
                 var rotation = Quaternion.LookRotation(lookPos);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * timeScale * Time.deltaTime);
                 animator.SetBool("walk", false);
                 animator.SetBool("run", true);
                 transform.Translate(Vector3.forward * 3 * Time.deltaTime * timeScale);

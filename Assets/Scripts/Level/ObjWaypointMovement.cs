@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 public class ObjWaypointMovement : MonoBehaviour, IRewindable
 {
 
-    [SerializeField] protected List<GameObject> waypoints;
+    [SerializeField] public List<GameObject> waypoints;
     protected int currentWaypoint = 0;
 
     [Header("Duration of each movement step")]

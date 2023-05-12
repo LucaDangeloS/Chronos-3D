@@ -10,6 +10,11 @@ public class ObjSmoothWaypointMovement : ObjWaypointMovement
 
     public override void MoveToNextWaypoint()
     {
+        if (waypoints.Count == 0)
+        {
+            return;
+        }
+
         if (currentWaypoint >= waypoints.Count)
         {
             // create empty tween
