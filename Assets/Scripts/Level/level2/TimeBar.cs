@@ -16,11 +16,13 @@ public class TimeBar : MonoBehaviour
     public GameObject gameOverScreen;
     public StarterAssetsInputs inputController;
 
+    //Ajustamos el valor máximo del slider al valor del tiempo del nivel.
     public void SetMaxTime(int time) {
         slider.maxValue = time;
         slider.value = time;
     }
 
+    //Actualizamos el valor de la barra de tiempo.
     public void SetTime(int Time) {
         slider.value = Time;
     }
@@ -33,6 +35,7 @@ public class TimeBar : MonoBehaviour
     }
 
 
+    // Cada segundo vamos actualizando el valor del slider.
     private IEnumerator UpdateTime() {
         while (remainingDuration >= 0 ) {
             remainingDuration--;
@@ -44,6 +47,7 @@ public class TimeBar : MonoBehaviour
     }
 
 
+    //Al finalizar el timer matamos al jugador y activamos la pantalla de muerte.
     private void onEnd() {
         inputController.setGamePaused(true);
         Time.timeScale = 0f;
