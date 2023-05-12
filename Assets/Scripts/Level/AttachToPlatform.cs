@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttachToPlatform : MonoBehaviour
 {
-    private List<GameObject> entities;
+    private List<GameObject> entities = new List<GameObject>();
     private Vector3 lastPosition;
 
     void Start()
@@ -14,7 +14,7 @@ public class AttachToPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (entities != null)
+        if (entities != null && entities.Count != 0)
         {
             Vector3 positionDelta = transform.position - lastPosition;
             if (Mathf.Abs(positionDelta.magnitude) > 0.0001f && entities != null)
@@ -27,7 +27,6 @@ public class AttachToPlatform : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("asdasd");
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemies"))
         {
             entities.Add(collision.gameObject);
