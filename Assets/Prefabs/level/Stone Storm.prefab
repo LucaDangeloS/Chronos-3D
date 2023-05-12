@@ -174,25 +174,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366681549957031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2539132893871805004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 0
-  rotateYcomponent: 720
-  rotateZcomponent: 360
-  rotateSpeed: 2
 --- !u!1001 &5042366681575014947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304,25 +285,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366681575014950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4332048875017942256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 360
-  rotateYcomponent: 720
-  rotateZcomponent: 0
-  rotateSpeed: 1
 --- !u!4 &4332048875018037456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8783306491909106419, guid: f02116c209ecd9e488fc4d2cd8996133,
@@ -446,25 +408,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366681889467275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5772165760951957330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 0
-  rotateYcomponent: 720
-  rotateZcomponent: 360
-  rotateSpeed: 1
 --- !u!1001 &5042366682220504520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -576,25 +519,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366682220504523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364634973102363490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 0
-  rotateYcomponent: 720
-  rotateZcomponent: 0
-  rotateSpeed: 2
 --- !u!4 &364634973102460738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4680757731159730826, guid: 0fde05fa0f3321942a21896ff4f0856f,
@@ -718,25 +642,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366682344565555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5772165760362641386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 0
-  rotateYcomponent: 360
-  rotateZcomponent: 360
-  rotateSpeed: 2
 --- !u!1001 &5042366682617273884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -848,25 +753,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366682617273887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2539132894951713780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 360
-  rotateYcomponent: 720
-  rotateZcomponent: 360
-  rotateSpeed: 1
 --- !u!4 &2539132894951815124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7405846476849834440, guid: c6308cb7062fac34e8e50600086b12a1,
@@ -990,25 +876,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366682645787877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4332048873955885617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 360
-  rotateYcomponent: 360
-  rotateZcomponent: 0
-  rotateSpeed: 1
 --- !u!1001 &5042366682766223396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1126,25 +993,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366682766223399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5772165760226194686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 0
-  rotateYcomponent: 720
-  rotateZcomponent: 360
-  rotateSpeed: 2
 --- !u!1001 &5042366683052280188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1262,22 +1110,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5042366683052280191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364634971281784790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b68d2858cfb2dd459282527ddf4b319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  duration: 3
-  objTimeScale: 1
-  rotateXcomponent: 0
-  rotateYcomponent: 720
-  rotateZcomponent: 360
-  rotateSpeed: 1

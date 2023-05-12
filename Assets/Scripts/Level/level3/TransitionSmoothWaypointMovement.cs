@@ -16,4 +16,12 @@ public class TransitionSmoothWaypointMovement : ObjSmoothWaypointMovement
         Destroy(rb);
         rotationTween.Pause();
     }
+
+    public override void Rewind()
+    {
+    }
+
+    public override void StopRewind()
+    {
+    }
 }

@@ -25,8 +25,7 @@ public class CreatePathway : MonoBehaviour
         if (triggered)
             return;
         enemies = GameObject.FindGameObjectsWithTag("Enemies");
-        Debug.Log(enemies.Length);
-        if (enemies.Length  == 0 )
+        if (enemies.Length  != 0 )
         {
             AssignWaypointsToRocks();
         }

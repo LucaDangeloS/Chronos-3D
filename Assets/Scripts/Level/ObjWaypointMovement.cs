@@ -76,14 +76,14 @@ public class ObjWaypointMovement : MonoBehaviour, IRewindable
         rotationTween.timeScale = objTimeScale;
     }
 
-    public void Rewind()
+    public virtual void Rewind()
     {
         isRewinding = true;
         movementTween?.PlayBackwards();
         rotationTween?.PlayBackwards();
     }
 
-    public void StopRewind()
+    public virtual void StopRewind()
     {
         movementTween?.PlayForward();
         rotationTween?.PlayForward();
